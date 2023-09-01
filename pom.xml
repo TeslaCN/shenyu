@@ -160,7 +160,7 @@
         <bytebuddy.version>1.12.6</bytebuddy.version>
         <spring-ldap.version>2.3.4.RELEASE</spring-ldap.version>
         <jaxb.api.version>2.3.1</jaxb.api.version>
-        <mail.version>1.6.2</mail.version>
+        <mail.version>2.0.1</mail.version>
         <docker-maven-plugin.version>0.40.1</docker-maven-plugin.version>
         <maven-assembly-plugin.version>3.5.0</maven-assembly-plugin.version>
         <ojdbc8.version>19.3.0.0</ojdbc8.version>
@@ -443,17 +443,6 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
                 <version>${spring-cloud-netflix-ribbon.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>javax.mail</groupId>
-                <artifactId>javax.mail-api</artifactId>
-                <version>${mail.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.sun.mail</groupId>
-                <artifactId>javax.mail</artifactId>
-                <version>${mail.version}</version>
             </dependency>
 
             <dependency>

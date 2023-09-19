@@ -18,8 +18,9 @@
 package org.apache.shenyu.sync.data.http;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.extension.responsetemplating.ResponseTemplateTransformer;
 import com.google.common.collect.Lists;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.HttpHeaders;
 import org.apache.shenyu.common.constant.HttpConstants;
 import org.apache.shenyu.common.exception.CommonErrorCode;
 import org.apache.shenyu.common.utils.GsonUtils;
@@ -33,8 +34,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
-import wiremock.org.apache.http.HttpHeaders;
-import wiremock.org.apache.http.entity.ContentType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -68,7 +67,6 @@ public class AccessTokenManagerTest {
     public void before() {
         this.wireMockServer = new WireMockServer(
                 options()
-                        .extensions(new ResponseTemplateTransformer(false))
                         .dynamicPort());
         this.wireMockServer.start();
         wireMockServer.stubFor(get(urlPathEqualTo("/platform/login"))

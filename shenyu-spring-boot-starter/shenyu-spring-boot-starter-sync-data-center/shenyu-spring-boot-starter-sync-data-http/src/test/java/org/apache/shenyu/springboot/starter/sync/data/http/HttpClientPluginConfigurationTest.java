@@ -18,6 +18,8 @@
 package org.apache.shenyu.springboot.starter.sync.data.http;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.HttpHeaders;
 import org.apache.shenyu.common.exception.CommonErrorCode;
 import org.apache.shenyu.common.utils.GsonUtils;
 import org.apache.shenyu.sync.data.api.PluginDataSubscriber;
@@ -32,8 +34,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import wiremock.org.apache.http.HttpHeaders;
-import wiremock.org.apache.http.entity.ContentType;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;

@@ -135,7 +135,7 @@ public class ModifyResponsePlugin extends AbstractShenyuPlugin {
 
             // reset http status
             ClientResponse clientResponse = ResponseUtils.buildClientResponse(this.getDelegate(), body);
-            HttpStatus statusCode = clientResponse.statusCode();
+            HttpStatus statusCode = HttpStatus.valueOf(clientResponse.statusCode().value());
             if (this.ruleHandle.getStatusCode() > 0) {
                 this.setStatusCode(statusCode = HttpStatus.valueOf(this.ruleHandle.getStatusCode()));
             }
@@ -143,7 +143,7 @@ public class ModifyResponsePlugin extends AbstractShenyuPlugin {
             // reset http headers
             this.getDelegate().getHeaders().clear();
             this.getDelegate().getHeaders().putAll(httpHeaders);
-            int rowStatusCode = clientResponse.rawStatusCode();
+            int rowStatusCode = statusCode.value();
             ExchangeStrategies strategies = clientResponse.strategies();
 
             return ClientResponse.create(statusCode, strategies)

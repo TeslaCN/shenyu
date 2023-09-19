@@ -27,6 +27,7 @@ import org.apache.shenyu.plugin.api.utils.WebFluxResultUtils;
 import org.apache.shenyu.plugin.base.utils.ResponseUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.reactive.function.BodyExtractors;
 import org.springframework.web.reactive.function.client.ClientResponse;
@@ -90,7 +91,7 @@ public class WebClientMessageWriter implements MessageWriter {
             exchange.getAttributes().put(Constants.RESPONSE_MONO, responseMono);
             // watcher httpStatus
             final Consumer<HttpStatus> consumer = exchange.getAttribute(Constants.WATCHER_HTTP_STATUS);
-            Optional.ofNullable(consumer).ifPresent(c -> c.accept(response.getStatusCode()));
+            Optional.ofNullable(consumer).ifPresent(c -> c.accept(Optional.ofNullable(response.getStatusCode()).map(HttpStatusCode::value).map(HttpStatus::valueOf).orElse(null)));
             return responseMono;
         }));
     }

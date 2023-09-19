@@ -25,6 +25,7 @@ import org.apache.shenyu.plugin.api.result.ShenyuResultEnum;
 import org.apache.shenyu.plugin.api.result.ShenyuResultWrap;
 import org.apache.shenyu.plugin.api.utils.WebFluxResultUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
@@ -50,7 +51,7 @@ public class RPCMessageWriter implements MessageWriter {
             exchange.getAttributes().put(Constants.RESPONSE_MONO, responseMono);
             // watcher httpStatus
             final Consumer<HttpStatus> consumer = exchange.getAttribute(Constants.WATCHER_HTTP_STATUS);
-            Optional.ofNullable(consumer).ifPresent(c -> c.accept(exchange.getResponse().getStatusCode()));
+            Optional.ofNullable(consumer).ifPresent(c -> c.accept(Optional.ofNullable(exchange.getResponse().getStatusCode()).map(HttpStatusCode::value).map(HttpStatus::valueOf).orElse(null)));
             return responseMono;
         }));
     }

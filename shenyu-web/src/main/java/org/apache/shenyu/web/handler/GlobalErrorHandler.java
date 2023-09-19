@@ -54,7 +54,7 @@ public class GlobalErrorHandler implements ErrorWebExceptionHandler {
             httpStatus = HttpStatus.BAD_REQUEST;
             errorResult = ShenyuResultWrap.error(exchange, httpStatus.value(), throwable.getMessage(), null);
         } else if (throwable instanceof ResponseStatusException) {
-            httpStatus = ((ResponseStatusException) throwable).getStatus();
+            httpStatus = HttpStatus.valueOf(((ResponseStatusException) throwable).getStatusCode().value());
             String errMsg = StringUtils.hasLength(((ResponseStatusException) throwable).getReason()) ? ((ResponseStatusException) throwable).getReason() : httpStatus.getReasonPhrase();
             errorResult = ShenyuResultWrap.error(exchange, httpStatus.value(), errMsg, null);
         } else {

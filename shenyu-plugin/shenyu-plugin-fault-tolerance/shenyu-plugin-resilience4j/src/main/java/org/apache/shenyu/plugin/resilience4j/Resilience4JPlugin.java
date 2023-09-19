@@ -34,11 +34,13 @@ import org.apache.shenyu.plugin.resilience4j.executor.Executor;
 import org.apache.shenyu.plugin.resilience4j.executor.RateLimiterExecutor;
 import org.apache.shenyu.plugin.resilience4j.handler.Resilience4JHandler;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
 
 /**
@@ -78,7 +80,7 @@ public class Resilience4JPlugin extends AbstractShenyuPlugin {
         Resilience4JConf conf = Resilience4JBuilder.build(rule);
         return combinedExecutor.run(
                 chain.execute(exchange).doOnSuccess(v -> {
-                    HttpStatus status = exchange.getResponse().getStatusCode();
+                    HttpStatus status = Optional.ofNullable(exchange.getResponse().getStatusCode()).map(HttpStatusCode::value).map(HttpStatus::valueOf).orElse(null);
                     if (Objects.isNull(status) || !status.is2xxSuccessful()) {
                         exchange.getResponse().setStatusCode(null);
                         throw new CircuitBreakerStatusCodeException(Objects.isNull(status) ? HttpStatus.INTERNAL_SERVER_ERROR : status);

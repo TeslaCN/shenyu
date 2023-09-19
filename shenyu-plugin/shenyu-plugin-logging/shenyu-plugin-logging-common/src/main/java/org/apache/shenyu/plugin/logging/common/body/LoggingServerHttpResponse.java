@@ -218,7 +218,7 @@ public class LoggingServerHttpResponse<L extends ShenyuRequestLog> extends Serve
     public void logError(final Throwable throwable) {
         HttpStatus httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
         if (throwable instanceof ResponseStatusException) {
-            httpStatus = ((ResponseStatusException) throwable).getStatus();
+            httpStatus = HttpStatus.valueOf(((ResponseStatusException) throwable).getStatusCode().value());
         }
         logInfo.setStatus(httpStatus.value());
         logInfo.setTraceId(getTraceId());

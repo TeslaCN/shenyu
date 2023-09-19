@@ -26,6 +26,7 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.NettyDataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.server.reactive.AbstractServerHttpResponse;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.server.ServerWebExchange;
@@ -81,7 +82,7 @@ public class NettyHttpClientPlugin extends AbstractHttpClientPlugin<HttpClientRe
                     response.getHeaders().putAll(headers);
                     // watcher httpStatus
                     final Consumer<HttpStatus> consumer = exchange.getAttribute(Constants.WATCHER_HTTP_STATUS);
-                    Optional.ofNullable(consumer).ifPresent(c -> c.accept(response.getStatusCode()));
+                    Optional.ofNullable(consumer).ifPresent(c -> c.accept(Optional.ofNullable(response.getStatusCode()).map(HttpStatusCode::value).map(HttpStatus::valueOf).orElse(null)));
                     return Mono.just(res);
                 }));
     }

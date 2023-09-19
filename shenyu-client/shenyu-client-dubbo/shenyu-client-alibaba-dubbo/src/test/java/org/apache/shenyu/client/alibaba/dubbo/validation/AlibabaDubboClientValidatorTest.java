@@ -21,7 +21,7 @@ import com.alibaba.dubbo.common.URL;
 import org.apache.shenyu.client.alibaba.dubbo.validation.mock.MockValidationParameter;
 import org.junit.jupiter.api.Test;
 
-import javax.validation.ValidationException;
+import jakarta.validation.ValidationException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;

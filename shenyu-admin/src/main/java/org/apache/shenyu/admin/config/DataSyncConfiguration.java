@@ -91,12 +91,6 @@ public class DataSyncConfiguration {
         public HttpLongPollingDataChangedListener httpLongPollingDataChangedListener(final HttpSyncProperties httpSyncProperties) {
             return new HttpLongPollingDataChangedListener(httpSyncProperties);
         }
-
-        @Bean
-        @ConditionalOnMissingBean(ConfigController.class)
-        public ConfigController configController(final HttpLongPollingDataChangedListener httpLongPollingDataChangedListener) {
-            return new ConfigController(httpLongPollingDataChangedListener);
-        }
     }
 
     /**

@@ -23,6 +23,8 @@ import org.apache.shenyu.admin.model.result.ShenyuAdminResult;
 import org.apache.shenyu.admin.utils.ShenyuResultMessage;
 import org.apache.shenyu.common.dto.ConfigData;
 import org.apache.shenyu.common.enums.ConfigGroupEnum;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,13 +33,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.Map;
 
 /**
  * This Controller only when HttpLongPollingDataChangedListener exist, will take effect.
  */
-@ResponseBody
+@RestController
 @RequestMapping("/configs")
+@ConditionalOnBean(HttpLongPollingDataChangedListener.class)
 public class ConfigController {
     
     private final HttpLongPollingDataChangedListener longPollingListener;

@@ -24,8 +24,6 @@ import org.apache.shenyu.admin.utils.ShenyuResultMessage;
 import org.apache.shenyu.common.dto.ConfigData;
 import org.apache.shenyu.common.enums.ConfigGroupEnum;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

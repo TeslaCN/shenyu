@@ -36,7 +36,6 @@ import org.apache.shenyu.admin.config.properties.PolarisProperties;
 import org.apache.shenyu.admin.config.properties.WebsocketSyncProperties;
 import org.apache.shenyu.admin.config.properties.ZookeeperProperties;
 import org.apache.shenyu.admin.config.properties.ApolloProperties;
-import org.apache.shenyu.admin.controller.ConfigController;
 import org.apache.shenyu.admin.listener.DataChangedInit;
 import org.apache.shenyu.admin.listener.DataChangedListener;
 import org.apache.shenyu.admin.listener.apollo.ApolloClient;
